@@ -16,7 +16,8 @@ jobs:
 
       - uses: google-github-actions/setup-gcloud@v2
 
-      - run: gcloud auth configure-docker asia-northeast2-docker.pkg.dev
+      - name: Configure Docker
+        run: gcloud auth configure-docker asia-northeast2-docker.pkg.dev
 
       - name: Build & Push image
         run: |
@@ -30,7 +31,7 @@ jobs:
           gcloud run deploy my-app-service \
             --image=$IMAGE:$GITHUB_SHA \
             --platform=managed \
-            --region=${{ secrets.GCP_REGION }} \
+            --region=asia-northeast2 \
             --allow-unauthenticated \
             --port=8080 \
             --memory=512Mi \
